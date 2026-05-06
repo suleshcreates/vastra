@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Manrope", sans-serif;
+}
+
+:root {
+  --color-sand: #f4ede3;
+  --color-clay: #e6d8ca;
+  --color-ink: #171313;
+  --color-muted: #65574f;
+  --color-burgundy: #7a2f2d;
+  --color-gold: #d6bc96;
+  --color-chocolate: #7a512e;
+  --color-border: rgba(23, 19, 19, 0.08);
+  --color-border-strong: rgba(23, 19, 19, 0.16);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-sand);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(23, 19, 19, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(23, 19, 19, 0.24);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(23, 19, 19, 0.38);
+}
+
+.premium-btn {
+  @apply rounded-full bg-[var(--color-ink)] px-6 py-4 text-sm uppercase tracking-[0.28em] text-white transition-all duration-300 hover:bg-[var(--color-burgundy)];
+}
+
+/* ── Skeleton shimmer for loading states ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-clay) 25%,
+    #efe4d4 50%,
+    var(--color-clay) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 1rem;
+}
+
+/* ── Gold sweep text animation for splash ── */
+@keyframes goldSweep {
+  0%   { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gold-sweep-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-sand) 0%,
+    var(--color-gold) 40%,
+    #fff 50%,
+    var(--color-gold) 60%,
+    var(--color-sand) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldSweep 2.8s ease-in-out 0.4s forwards;
+}
+
+/* ── Ken Burns slow zoom + pan for images ── */
+@keyframes kenBurns {
+  0%   { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
+.ken-burns {
+  animation: kenBurns 20s ease-in-out alternate infinite;
+}
+
+/* ── Magnetic button hover glow ── */
+.magnetic-glow {
+  position: relative;
+}
+.magnetic-glow::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: radial-gradient(circle, var(--color-gold), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+.magnetic-glow:hover::after {
+  opacity: 0.25;
+}
+
+/* ── Quick View overlay fade ── */
+.quick-view-overlay {
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .quick-view-overlay {
+  opacity: 1;
+}
+
+/* ── Sticky bar slide-up ── */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.sticky-bar-enter {
+  animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
